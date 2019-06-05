@@ -1,3 +1,7 @@
+
+/noselus-workspace.code-workspace
+data/*.txt
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
