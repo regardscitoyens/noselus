@@ -1,4 +1,5 @@
 
+.venv
 /noselus-workspace.code-workspace
 data/*.txt
 
