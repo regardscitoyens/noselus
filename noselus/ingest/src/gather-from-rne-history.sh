@@ -28,8 +28,7 @@ gather_one_file () {
 }
 
 #gather_one_file "8-rne-deputes.txt"
-#files=("1-rne-cm.txt" "2-rne-epci.txt" "3-rne-cd.txt" "4-rne-cr.txt" "5-rne-rpe.txt" "7-rne-senateurs.txt" "8-rne-deputes.txt" "9-rne-maires.txt")
-files=("2-rne-epci.txt" "3-rne-cd.txt" "4-rne-cr.txt" "5-rne-cac.txt" "6-rne-rpe.txt" "7-rne-senateurs.txt" "8-rne-deputes.txt" "9-rne-maires.txt")
+files=("1-rne-cm.txt" "2-rne-epci.txt" "3-rne-cd.txt" "4-rne-cr.txt" "5-rne-rpe.txt" "7-rne-senateurs.txt" "8-rne-deputes.txt" "9-rne-maires.txt")
 
 
 for f in "${files[@]}" 
