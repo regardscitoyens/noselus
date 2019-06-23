@@ -1,6 +1,7 @@
 from elasticsearch import Elasticsearch
 import csv
 import json
+import re
 from datetime import datetime
 
 
@@ -8,11 +9,12 @@ es = Elasticsearch(['localhost'])
 
 
 def ingest_one_file(filename, mandat_name):
-    path = "../../../data/" +filename 
+    path = "../../../data/" +filename
     with open(path) as file:
         reader = csv.reader(file, delimiter='\t')
 
         header = []
+        dates = []
         idx_count = 0
 
         for row in reader:
@@ -20,14 +22,18 @@ def ingest_one_file(filename, mandat_name):
             if len(header) <= 0 :
                 for field in row:
                     header.append(field)
+                    if (re.search('Date', field)):
+                        dates.append(field)
             else :
                 doc = dict()
                 doc['mandat'] = mandat_name
-
                 pos = 0
                 for field in row:
                     doc[header[pos]] = field
                     pos = pos +1
+                for date in dates:
+                    if (doc[date]):
+                        doc[date] = datetime.strptime(doc[date], "%d/%m/%Y").strftime("%Y-%m-%d")
 
                 idx_count = idx_count+1
                 idx_str = "{}-{}".format(mandat_name,idx_count)
