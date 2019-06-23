@@ -37,7 +37,7 @@ def ingest_one_file(filename, mandat_name):
 
                 idx_count = idx_count+1
                 idx_str = "{}-{}".format(mandat_name,idx_count)
-                res = es.index(index="mandat-idx", id=idx_count, body=doc)
+                res = es.index(index="mandat-idx", id=idx_str, body=doc)
 
                 #print(res)
                 if (idx_count%1000 == 0):
