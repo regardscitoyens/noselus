@@ -2,10 +2,12 @@ from elasticsearch import Elasticsearch
 import csv
 import json
 import re
+import sys
 from datetime import datetime
 
-
-es = Elasticsearch(['localhost'])
+es = None
+if (not len(sys.argv)):
+    es = Elasticsearch(['localhost'])
 
 csv_field_names = [
 "mandat",
@@ -64,7 +66,12 @@ def ingest_one_file(filename, mandat_name, header):
 
                 idx_count = idx_count+1
                 idx_str = "{}-{}".format(mandat_name,idx_count)
-                res = es.index(index="mandat-idx", id=idx_str, body=doc)
+                if (es):
+                    try:
+                        res = es.index(index="mandat-idx", id=idx_str, body=doc)
+                    except:
+                        print("Error with "+idx_str+" "+str(doc))
+
                 #print(res)
 
                 output_csv.writerow(doc)
