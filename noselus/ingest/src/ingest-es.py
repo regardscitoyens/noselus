@@ -67,6 +67,8 @@ def ingest_one_file(filename, mandat_name, header):
                         doc[date] = datetime.strptime(doc[date], "%d/%m/%Y").strftime("%Y-%m-%d")
                 if ((not doc.get("Code du département") or doc.get("Code du département") == "0") and doc.get("Code du département de l'EPCI")):
                     doc["Code du département"] = doc["Code du département de l'EPCI"]
+                if (doc['Code du département'] == '69M' or doc['Code du département'] == '69D'):
+                    doc['Code du département'] = '69'
 
                 idx_count = idx_count+1
                 idx_str = "{}-{}".format(mandat_name,idx_count)
